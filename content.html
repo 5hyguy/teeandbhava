@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content</title>
+  <link rel="stylesheet" type="text/css"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="content.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Source+Code+Pro:wght@300&display=swap');
+  </style>
+
+</head>
+
+<body onload="tee()">
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Travel Blog
+        <img src="images/globe.png"></a>
+
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Offers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Tips</a>
+        </li>
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+            Book a trip
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.airbnb.com/" target="_blank">Airbnb</a>
+            <a class="dropdown-item" href="https://www.tripadvisor.com/" target="_blank">Trip Advisor</a>
+            <a class="dropdown-item" href="https://www.expedia.com/?pwaLob=wizard-hotel-pwa-v2" target="
+              _blank">Expedia</a>
+        </li>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search this site" aria-label="Search">
+
+      </form>
+    </div>
+  </nav>
+  <br><br><br>
+  <h1 class="text-center">My Favourite blog</h1><br>
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-1 col-sm-1"></div>
+      <div class="col-lg-8 col-sm-8">
+
+        <div id="tableTravel"></div>
+
+        <h6>laST Updated: 10/10/20 | October 10th, 2020</h6><br>
+        <h4 class="text-center">Follow us
+          <a href="https://www.facebook.com/" target="_blank"><img id="image" src="images/facebook.png"></a>
+          <a href="https://www.instagram.com/" target="_blank"><img id="image" src="images/instagram.png"></a>
+          <a href="https://twitter.com/" target="_blank"><img id="image" src="images/twitter.png"></a>
+          <a href="https://www.pinterest.com/" target="_blank"><img id="image" src="images/pintrest.png"></a>
+
+        </h4>
+      </div>
+
+      <div class="col-lg-2 col-sm-2">
+
+        <div class="box1">
+          <h3 class="text-center underline" id="text">Recent Posts</h3>
+
+          <ul id="side"></ul>
+        </div>
+        <br>
+
+        <a href="https://www.google.com/travel/flights" target="_blank" id="button" class="btn" role="button">Plan a
+          Vacation</a>
+        <br>
+        <br>
+        <div id="basicMap"></div>
+        <br />
+        <div class="box2">
+          <h3 id="text" class="underline text-center">Current Weather</h3>
+          <ul id="demo"></ul>
+        </div>
+        <br>
+        <br>
+
+        <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+
+      </div>
+
+      <div class="col-lg-1 col-sm-1"></div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Copyright 1234-5678, All rights reserved</p>
+  </div>
+  <button style="display:none" class="btn btn-primary" id="buttonAdd">Add Location</button>
+
+  <script>
+    function gup(name, url) {
+      if (!url)
+        url = location.href;
+      name = name
+        .replace(/[\[]/, "\\\[")
+        .replace(/[\]]/, "\\\]");
+      var regexS = "[\\?&]" + name + "=([^&#]*)";
+      var regex = new RegExp(regexS);
+      var results = regex.exec(url);
+      return results == null
+        ? null
+        : results[1];
+    }
+  </script>
+
+  <script>
+    let travel = [];
+
+    function populateTable() {
+      var tt = gup('text', window.location.href);
+
+      for (let i = 0; i < travel.length; i++) {
+
+        if (travel[i].city.includes(tt)) {
+            tableTravel.innerHTML += `
+                <span style="font-weight:bolder;text-transform:capitalize">${travel[i]
+                .city}, ${travel[i]
+                  .country} (${travel[i]
+                    .inputFrom} - ${travel[i]
+                      .inputTo})</span>
+                <img class="img"
+        src="${travel[i]
+                .featured}">
+
+    <p class="text">
+      ${travel[i]
+                .description}
+    </p><br>
+
+`;
+
+          }
+        }
+        for (let i = 0; i < 3; i++) {
+          if (travel[i].city != 'test') {
+          side.innerHTML += `
+<li>
+    <a href="content.html?text=${travel[i]
+              .city}&text1=${travel[i]
+                .country}"><span style="font-weight:bolder;text-transform:capitalize">${travel[i]
+                  .city}, ${travel[i]
+                    .country} (${travel[i]
+                      .inputFrom} - ${travel[i]
+                        .inputTo})</span></a>
+                
+                </li>
+`;
+
+        }
+      }
+
+    }
+
+    buttonAdd.addEventListener("click", function () {
+      populateTable();
+      saveToLocalStorage();
+
+    });
+
+    function saveToLocalStorage() {
+      let jsonString = JSON.stringify(travel);
+      localStorage.setItem("travelData", jsonString);
+    }
+
+    function loadFromLocalStorage() {
+      let jsonString = localStorage.getItem("travelData");
+      if (jsonString) {
+        travel = JSON.parse(jsonString);
+      }
+    }
+
+    loadFromLocalStorage();
+    populateTable();
+  </script>
+  <script>
+    function tee() {
+
+      var dam = gup('text1', window.location.href);
+      fetch("http://api.openweathermap.org/data/2.5/weather?q=" + dam + "&appid=745bd0cad1b74da8f40ccc87d34264e1").then(function (response) {
+
+        //console.log(response)
+
+        response
+          .json()
+          .then(function (result) {
+
+            // textBox.innerHTML = "done fetching users and parsing the JSON!"
+            //textBox.innerHTML = result[1].name;
+            console.log(result.weather[0]);
+            let lat = "Latitude and Longitude : " + result.coord.lat + " / " + result.coord.lon;
+            let weather = "Weather : " + result
+              .weather[0]
+              .main + " <br /> <br /> " + "More description : " + result
+                .weather[0]
+                .description;
+            let temp = "temperature : " + result.main.temp + "<br /> <br /> " + " Feels like : " + result.main.feels_like;
+
+            document
+              .getElementById("demo")
+              .innerHTML = lat + "<br /><br />" + temp + "<br /><br /> " + weather;
+
+          })
+
+      })
+    }
+  </script>
+  <script src="map.js"></script>
+
+  <script>
+    init();
+  </script>
+  <script src="http://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

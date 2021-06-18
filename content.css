@@ -1,0 +1,117 @@
+img{
+    height: 30px;
+    width: 30px; 
+}
+body{
+    font-family: 'Roboto', sans-serif;
+}
+.img{
+    height: 400px;
+    width: 400px;
+    padding:10px 20px;
+    float: left;
+}
+.text{
+/* display: inline; */
+padding-left:15px;
+padding-right: 10px;
+
+text-align:justify;
+line-height: 35px;
+}
+h6{
+    padding-left:15px;   
+}
+#text{
+    color: white;
+}
+.error
+{
+    color : red;
+}
+
+.box1{
+    height: 245px;
+    width: 300px;
+    background-color:midnightblue;
+    line-height: 40px;
+    top: 100px;
+   left:90%;
+   padding-top: 10px;
+             z-index: 1;
+             opacity: 0.9;
+             border:3px solid gray;
+             border-radius: 10px;
+}
+.box2{
+    height: 265px;
+    width: 300px;
+    background-color:saddlebrown;
+    line-height: 20px;
+   
+    color:white;
+    top: 100px;
+   left:90%;
+   padding-top: 10px;
+             z-index: 1;
+             opacity: 0.9;
+             border:3px solid gray;
+             border-radius: 10px;
+}
+.underline{
+    text-decoration: underline;
+}
+
+ul, a{
+    color: white;
+
+}
+h5{
+    color: black;
+}
+ul, a:hover{
+    color:white;
+    list-style-type: square;
+}
+
+#button{
+    background-color: green;
+    height:45px;
+    width: 300px;
+    color: white;
+    border:2px solid gray;
+    border-radius: 5px;
+   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-size: 2rem;
+   padding-bottom: 55px;
+}
+
+#image{
+    padding-left: 8px;
+    height:50px;
+    width: 60px;
+}
+h4{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+h1{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 60px; 
+}
+.navbar-brand{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 30px;
+}
+#basicMap{
+    height:200px;
+    width:133%;
+}
+.footer {
+    position:relative;
+    padding-top: 13px;
+    width: 100%;
+    height:50px;
+    background-color:lavender;
+   font-size: 13px;
+    text-align: center;
+ }

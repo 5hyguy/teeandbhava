@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="home.css"/>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  </head>
+
+  <body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Travel Blog
+          <img src="images/globe.png"></a>
+
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Offers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Tips</a>
+          </li>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+              Book a trip
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="https://www.airbnb.com/" target="_blank">Airbnb</a>
+              <a class="dropdown-item" href="https://www.tripadvisor.com/" target="_blank">Trip Advisor</a>
+              <a class="dropdown-item" href="https://www.expedia.com/?pwaLob=wizard-hotel-pwa-v2" target="_blank">Expedia</a>
+            </li>
+
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search this site" aria-label="Search">
+
+          </form>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="jumbotron">
+
+          <h1>
+            <i class="fa fa-camera-retro" aria-hidden="true"></i>
+            Travel Blog</h1>
+          <h6>Welcome to the travel diary!</h6>
+          <p>Want to add a new travel journey, here we go..
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Location</button>
+          </p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="error" id="error">Oops, There are no travel posts please add a post!!</div>
+        <div class="row row-cols-1 row-cols-md-3 g-4" id="tableTravel"></div>
+      </div>
+      <br><br>
+      <h4 class="text-center">Follow us
+        <a href="https://www.facebook.com/" target="_blank"><img id="image" src="images/facebook.png"></a>
+        <a href="https://www.instagram.com/" target="_blank"><img id="image" src="images/instagram.png"></a>
+        <a href="https://twitter.com/" target="_blank"><img id="image" src="images/twitter.png"></a>
+        <a href="https://www.pinterest.com/" target="_blank"><img id="image" src="images/pintrest.png"></a>
+
+      </h4><br>
+      <div class="footer">
+        <p>Copyright 1234-5678, All rights reserved</p>
+      </div>
+      <!-- Trigger the modal with a button -->
+
+      <!-- Modal -->
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+
+              <h4 class="modal-title">Create New Travel Location</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+              <div class="form-group">
+                <label>
+                  Name of the City:
+                  <input class="form-control" required="required" type="text" id="inputCity">
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  Country:
+                  <input class="form-control" required="required" type="text" id="inputCountry">
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  Date Visited From:
+                  <input class="form-control" required="required" type="date" id="inputFrom">
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  Date Visited To:
+                  <input class="form-control" required="required" type="date" id="inputTo">
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  Image address :
+                  <input class="form-control" required="required" type="text" id="featured">
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  Description:
+                  <textarea class="form-control" id="inputDescription" rows="4" cols="20"></textarea>
+
+                </label>
+              </div>
+
+              <button class="btn btn-primary" id="buttonAdd">Add Location</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <script>
+      let travel = [
+        {
+          city: "",
+          country: "test",
+          city: "test",
+          date: "test",
+          featured: "test"
+
+        }
+      ];
+        let tablePeople = document.getElementById("tablePeople");
+        let buttonAdd = document.getElementById("buttonAdd");
+        let inputFrom = document.getElementById("inputFrom");
+        let inputTo = document.getElementById("inputTo");
+        let inputCity = document.getElementById("inputCity");
+        let inputDescription = document.getElementById("inputDescription");
+        let inputCountry = document.getElementById("inputCountry");
+        let featured = document.getElementById("featured");
+
+        function populateTable() {
+          var error = document.getElementById("error");
+          for (let i = 0; i < travel.length; i++) {
+            if (travel[i].city != 'test') {
+              var error = document.getElementById("error");
+              error.style.display = "none";
+              tableTravel.innerHTML += `
+ <div class="col">
+          <div class="card h-100">
+            <a href="content.html?text=${travel[i]
+              .city}&text1=${travel[i]
+              .country}"><img class="img1" src="${travel[i]
+                .featured}" class="card-img-top" ></a>
+            <div class="card-body">
+              <h5 class="card-title"><a href="content.html?text=${travel[i]
+                .city}&text1=${travel[i]
+                .country}">${travel[i]
+                .city}, ${travel[i]
+                .country} 
+                <a onclick="return confirm('Are you sure this should be deleted?')" href="delete.html?text=${travel[i]
+                .city}&text1=${travel[i]
+                .country}"><img class="right" src="https://cdn.iconscout.com/icon/premium/png-512-thumb/delete-1432400-1211078.png" /></a>
+                
+                <br>
+           <span class="card-date"> Date Visited : (${travel[i]
+                .inputFrom} - ${travel[i]
+                .inputTo})</span></a></h5>
+            </div>
+            
+          </div>
+        </div>
+`;
+            } else {
+              var error = document.getElementById("error");
+              error.style.display = "block";
+            }
+
+          }
+
+        }
+
+        buttonAdd.addEventListener("click", function () {
+          if (document.getElementById("inputCity").value.length != 0 && document.getElementById("inputDescription").value.length != 0 && document.getElementById("inputCountry").value.length != 0 && document.getElementById("featured").value.length != 0) {
+
+            newName = inputCity
+              .value
+              .replace(/\s+/g, '-');
+            let newTravel = {
+              city: newName,
+              description: inputDescription.value,
+              country: inputCountry.value,
+              inputFrom: inputFrom.value,
+              inputTo: inputTo.value,
+              featured: featured.value
+            };
+
+            travel.push(newTravel);
+            location.reload();
+            populateTable();
+            saveToLocalStorage();
+          } else {
+            alert("One or more textfields are empty");
+          }
+        });
+
+        function saveToLocalStorage() {
+          let jsonString = JSON.stringify(travel);
+          localStorage.setItem("travelData", jsonString);
+        }
+
+        function loadFromLocalStorage() {
+          let jsonString = localStorage.getItem("travelData");
+          if (jsonString) {
+            travel = JSON.parse(jsonString);
+          }
+        }
+
+        loadFromLocalStorage();
+        populateTable();
+      </script>
+
+      <script src="http://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    </body>
+
+  </html>
